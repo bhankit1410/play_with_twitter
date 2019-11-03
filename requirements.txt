@@ -1,1 +1,4 @@
-t git
+pandas
+numpy
+os
+tweepy
