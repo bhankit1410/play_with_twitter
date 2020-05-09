@@ -1,2 +1,2 @@
 # play_with_twitter
-fun with twitter data
+handling the twitter data with the API and performing some random EDA.
