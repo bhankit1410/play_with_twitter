@@ -6,7 +6,7 @@ import org.apache.spark.streaming._
 import org.apache.spark.streaming.twitter._
 import org.apache.spark.streaming.StreamingContext._
 import org.jvnet.hk2.internal.Utilities._
-
+import com.ankit.Utilities._
 /** Listens to a stream of tweets and saves them to disk. */
 object SaveTweets {
   
@@ -44,20 +44,22 @@ object SaveTweets {
         // Combine each partition's results into a single RDD:
         val repartitionedRDD = rdd.repartition(1).cache()
         // And print out a directory with the results.
+
+        repartitionedRDD.map(p => println(p))
         repartitionedRDD.saveAsTextFile("Tweets_" + time.milliseconds.toString)
         // Stop once we've collected 1000 tweets.
         totalTweets += repartitionedRDD.count()
         println("Tweet count: " + totalTweets)
-        if (totalTweets > 1000) {
-          System.exit(0)
-        }
+//        if (totalTweets > 1000) {
+//          System.exit(0)
+//        }
       }
     })
     
     // You can also write results into a database of your choosing, but we'll do that later.
     
     // Set a checkpoint directory, and kick it all off
-    ssc.checkpoint("C:/checkpoint/")
+    ssc.checkpoint("checkpoint/")
     ssc.start()
     ssc.awaitTermination()
   }  
