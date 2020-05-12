@@ -2,3 +2,10 @@ pandas
 numpy
 os
 tweepy
+flask
+socket
+sys
+requests
+requests_oauthlib
+json
+pyspark
